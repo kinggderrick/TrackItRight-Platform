@@ -20,7 +20,7 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('${API_BASE_URL}/api/users/register', formData);
+      const res = await axios.post(`${API_BASE_URL}/api/users/register`, formData);
       setMessage('Registration successful!');
       console.log(res.data);
     } catch (err) {

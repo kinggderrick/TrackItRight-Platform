@@ -3,14 +3,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ComplaintForm.css";
 import { API_BASE_URL } from "../config";
-
 export default function ComplaintForm({ userId, onComplaintSubmitted }) {
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState("");
   const [description, setDescription] = useState("");
 
   useEffect(() => {
-    axios.get("${API_BASE_URL}/api/categories")
+    axios.get(`${API_BASE_URL}/api/categories`)
       .then(res => setCategories(res.data))
       .catch(err => console.error("Error fetching categories:", err));
   }, []);
