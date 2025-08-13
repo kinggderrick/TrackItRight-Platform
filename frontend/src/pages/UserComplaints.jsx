@@ -1,13 +1,14 @@
 import React, { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import axios from "axios";
 import "./UserComplaints.css";
+import { API_BASE_URL } from "../config";
 
 const UserComplaints = forwardRef(({ userId }, ref) => {
   const [complaints, setComplaints] = useState([]);
 
   const fetchComplaints = () => {
     axios
-      .get(`http://localhost:8080/api/complaints/user/${userId}`)
+      .get(`${API_BASE_URL}/api/complaints/user/${userId}`)
       .then((res) => setComplaints(res.data))
       .catch((err) => console.error("Error fetching complaints:", err));
   };

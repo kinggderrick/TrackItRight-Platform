@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './RegisterPage.css';
+import { API_BASE_URL } from "../config"
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8080/api/users/register', formData);
+      const res = await axios.post('${API_BASE_URL}/api/users/register', formData);
       setMessage('Registration successful!');
       console.log(res.data);
     } catch (err) {
