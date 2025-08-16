@@ -14,6 +14,9 @@ public class UserService {
     }
 
     public User registerUser(User user) {
+    	if(user.getRole() == null) {
+            user.setRole(User.Role.USER); 
+       }
         // Save user to DB
         return userRepository.save(user);
     }

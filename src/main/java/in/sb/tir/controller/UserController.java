@@ -5,6 +5,8 @@ import in.sb.tir.model.User;
 import in.sb.tir.repository.UserRepository;
 import in.sb.tir.service.UserService;
 
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,15 +33,19 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail());
 
-        if (user == null) {
+        if (user == null || !user.getPassword().equals(request.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }
 
-        if (!user.getPassword().equals(request.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
-        }
+        
+     // Returning only necessary details
+        return ResponseEntity.ok(Map.of(
+            "id", user.getId(),
+            "name", user.getName(),
+            "email", user.getEmail(),
+            "role", user.getRole()
+        ));
 
-        return ResponseEntity.ok(user);
     }
 
 }
