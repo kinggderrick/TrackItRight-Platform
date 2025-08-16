@@ -62,6 +62,7 @@ export default function RegisterPage() {
           onChange={handleChange}
         >
           <option value="USER">User</option>
+          <option value="AUTHORITY">Authority</option>
           <option value="ADMIN">Admin</option>
         </select>
         <button type="submit">Register</button>
