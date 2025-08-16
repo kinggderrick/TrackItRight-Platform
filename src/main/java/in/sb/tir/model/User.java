@@ -2,6 +2,8 @@ package in.sb.tir.model;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 @Entity
 @Table(name = "users") 
 public class User {
@@ -18,15 +20,22 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    @Column(columnDefinition = "enum('ADMIN','USER','AUTHORITY')")
+    private Role role ;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+    
     public enum Role {
         USER,
         AUTHORITY,
         ADMIN
     }
+    
+
 
     
     // Getters & Setters

@@ -8,7 +8,7 @@ export default function RegisterPage() {
     name: '',
     email: '',
     password: '',
-    role: 'USER'
+    role: ''
   });
 
   const [message, setMessage] = useState('');
